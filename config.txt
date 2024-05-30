@@ -9,12 +9,18 @@
 # https://github.com/raspberrypi/documentation/blob/master/configuration/device-tree.md
 # https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README
 
+# Secure boot stuff
+# https://github.com/raspberrypi/buildroot/commit/f2e9e10f2b62dbca67cf1d9d2759c20c8c46c513
+kernel=zImage
+initramfs rootfs.cpio.zst
+uart_2ndstage=1
+
 # Enable 64-bit support
 arm_64bit=1
 
 # We always use the same names. The variant is selected in fwup.conf.
-start_file=start4.elf
-fixup_file=fixup4.dat
+start_file=start4x.elf
+fixup_file=fixup4x.dat
 
 # Disable the boot rainbow
 disable_splash=1
@@ -62,6 +68,7 @@ dtoverlay=ramoops
 
 # Enable the UART (/dev/ttyS0)
 enable_uart=1
+
 
 [cm4]
 # Raspberry Pi CM4-only settings
