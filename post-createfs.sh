@@ -30,6 +30,8 @@ fi
 
 # Use the VFAT image to build boot.img
 rm -rf "${GENIMAGE_TMP}"
+echo "genimage --rootpath \"${ROOTPATH_TMP}\" --tmppath \"${GENIMAGE_TMP}\" --inputpath \"${BINARIES_DIR}\" --outputpath \"${BINARIES_DIR}\" --config \"${GENIMAGE_BOOT_CFG}\""
+
 genimage \
 	--rootpath "${ROOTPATH_TMP}"   \
 	--tmppath "${GENIMAGE_TMP}"    \
@@ -43,4 +45,4 @@ cp "${BINARIES_DIR}/boot.img" "${NERVES_DEFCONFIG_DIR}/boot.img"
 cp "${BINARIES_DIR}/boot.sig" "${NERVES_DEFCONFIG_DIR}/boot.sig"
 
 # Run the common post-image processing for nerves
-$BR2_EXTERNAL_NERVES_PATH/board/nerves-common/post-createfs.sh $TARGET_DIR $FWUP_CONFIG
+#$BR2_EXTERNAL_NERVES_PATH/board/nerves-common/post-createfs.sh $TARGET_DIR $FWUP_CONFIG
