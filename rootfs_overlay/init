@@ -33,4 +33,4 @@ echo "Mounted /media/mmcblk0p2"
 # fi
 
 echo "Switching root :)"
-exec switch_root /media/mmcblk0p2/ /init
+exec switch_root /media/mmcblk0p2/ /sbin/init
