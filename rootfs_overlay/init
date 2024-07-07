@@ -1,12 +1,11 @@
 #!/bin/sh
 echo "======================= Running init from rootfs_overlay"
-echo "======================= Running init from rootfs_overlay" > /dev/console
 
 mount -t devtmpfs none /dev
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
-echo "Waiting for /dev/mmcblk0p2..." > /dev/console
+echo "Waiting for /dev/mmcblk0p2..."
 until  [ -b "/dev/mmcblk0p2" ]; do
   sleep 5
 done
@@ -15,8 +14,9 @@ done
 KEY_PATH="test-key.bin"
 #if cryptsetup open --type=luks2 --key-file "$KEY_PATH" /dev/mmcblk0p2 appfs; then
 mkdir /media/mmcblk0p2
-echo "Mounting /dev/mmcblkop2..." > /dev/console
-mount /dev/mmcblk0p2
+echo "Mounting /dev/mmcblk0p2..."
+mount /dev/mmcblk0p2 /media/mmcblk0p2
+echo "Mounted /media/mmcblk0p2"
 
 #mount /dev/mapper/appfs /media/mmcblk0p2
 # else
@@ -32,5 +32,5 @@ mount /dev/mmcblk0p2
 #     cp -r /root/mmcblk0p2/* /media/mmcblk0p2/
 # fi
 
-echo "Switching root :)" > /dev/console
-exec switch_root /media/mmcblk0p2/ /sbin/init
+echo "Switching root :)"
+exec switch_root /media/mmcblk0p2/ /init
