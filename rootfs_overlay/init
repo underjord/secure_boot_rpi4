@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "======================= Running init from rootfs_overlay"
 
-mount -t devtmpfs none /dev
+mount -t devtmpfs -o rw none /dev
 mount -t proc proc /proc
 mount -t sysfs sysfs /sys
 
@@ -11,12 +11,14 @@ until  [ -b "/dev/mmcblk0p2" ]; do
 done
 
 #rpi-otp-private-key -b > key.bin
-KEY_PATH="test-key.bin"
+#KEY_PATH="test-key.bin"
 #if cryptsetup open --type=luks2 --key-file "$KEY_PATH" /dev/mmcblk0p2 appfs; then
-mkdir /media/mmcblk0p2
+mkdir /media/root
 echo "Mounting /dev/mmcblk0p2..."
-mount /dev/mmcblk0p2 /media/mmcblk0p2
-echo "Mounted /media/mmcblk0p2"
+mount /dev/mmcblk0p2 /media/root
+echo "Mounted /media/root"
+exec sh
+#exec switch_root /media/root/ /sbin/init_sh
 
 #mount /dev/mapper/appfs /media/mmcblk0p2
 # else
@@ -32,5 +34,6 @@ echo "Mounted /media/mmcblk0p2"
 #     cp -r /root/mmcblk0p2/* /media/mmcblk0p2/
 # fi
 
-echo "Switching root :)"
-exec switch_root /media/mmcblk0p2/ /sbin/init
+#echo "Not switching root."
+#echo "Switching root :)"
+#exec switch_root /media/root/ /sbin/init
