@@ -1,4 +1,6 @@
 #!/bin/sh
+# Init script for the initramfs, first step where we control
+# things in the RPi boot sequence.
 echo "======================= Running init from rootfs_overlay"
 
 mount -t devtmpfs -o rw none /dev
@@ -17,8 +19,8 @@ mkdir /media/root
 echo "Mounting /dev/mmcblk0p2..."
 mount /dev/mmcblk0p2 /media/root
 echo "Mounted /media/root"
-exec sh
-#exec switch_root /media/root/ /sbin/init_sh
+#exec sh
+exec switch_root /media/root/ /sbin/init_sh
 
 #mount /dev/mapper/appfs /media/mmcblk0p2
 # else
