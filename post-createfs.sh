@@ -4,13 +4,11 @@ set -e
 
 FWUP_CONFIG=$NERVES_DEFCONFIG_DIR/fwup.conf
 
-# Modify this for your custom system that needs Secure Boot
-# Private key that matches the CM4's burned-in bootloader certificate 
-#export BOOT_PRIVATE_KEY=""
-# Public key that matches the private key used for 
-#export ROOTFS_PUBLIC_KEY=""
+# To use Secure Boot make sure to set the following env vars:
+# BOOT_PRIVATE_KEY="../mybootkey_private.pem" # Used to sign `boot.img`
+# ROOTFS_PUBLIC_KEY="../myrootkey_public.pem" # Used to verify signed root hash on root fs
 if [[ -z "${BOOT_PRIVATE_KEY}"]]; then
-	./secure_boot/generate_boot_image.sh
+	./secure_boot/generate_boot_img.sh
 fi
 
 # Run the common post-image processing for nerves

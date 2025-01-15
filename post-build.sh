@@ -16,7 +16,6 @@ function slim_down_dri_libs() {
     popd
 }
 
-
 slim_down_dri_libs
 
 # Create the fwup ops script to handling MicroSD/eMMC operations at runtime
